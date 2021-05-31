@@ -15,6 +15,7 @@ module operator_m
     public :: operator(.t.)
     public :: operator(.abs.)
     public :: outer_product
+    public :: skew
     
     ! defination
     
@@ -40,6 +41,7 @@ module operator_m
     
     interface operator(.ix.)
         procedure ix
+        procedure ixvector
     end interface
     
     interface operator(.xi.)
@@ -161,6 +163,17 @@ module operator_m
         C = matmul(inv(A),B)
     end function   
     
+    ! ix, matrix with vector
+    function ixvector(A,B) result (C)
+        implicit none
+        real(8), intent(in) :: A(:,:)
+        real(8), intent(in) :: B(:)
+        real(8) C(size(a,1))
+    
+        C = 0.0d0
+        C = matmul(inv(A),B)
+    end function     
+    
     
     ! xi
     function xi(A,B) result (C)
@@ -171,8 +184,8 @@ module operator_m
     
         C = 0.0d0
         C = matmul(A,inv(B))
-    end function       
-    
+    end function    
+   
     
     ! perform the outer product of two vectors a and b
     ! a ox b,  a xt b
