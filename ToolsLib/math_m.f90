@@ -2,7 +2,7 @@
 !! @author
 !!   G. Ma    
 !! @version A60514   
-!! @revision 20210507
+!! @revision 20210622
 !!    
     
 
@@ -145,7 +145,26 @@ module math_m
         vectorC(2) = vectorA(3)*vectorB(1)-vectorA(1)*vectorB(3)
         vectorC(3) = vectorA(1)*vectorB(2)-vectorA(2)*vectorB(1)
     !
-    end function        
+    end function       
+    
+    !>
+    !! outer product for two column vector in 3-dimension.
+    !!   C = A Ox B
+    !!
+    !! A matrix will be returned.
+    !!  
+    function outerProduct(vectorA,vectorB) result (C)
+        implicit none
+        real(8), intent(in) :: vectorA(3)
+        real(8), intent(in) :: vectorB(3)
+        real(8) :: C(3,3)
+
+        C = 0.0d0
+        C(1,1) = vectorA(1)*vectorB(1)
+        C(2,2) = vectorA(2)*vectorB(2)
+        C(3,3) = vectorA(3)*vectorB(3)
+    !
+    end function       
     
     !>
     !! Identity matrix.

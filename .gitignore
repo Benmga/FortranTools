@@ -1,0 +1,8 @@
+*.htm
+*.obj
+*.mod
+*.u2d
+x64\
+*.pdb
+*.lib
+.vs
