@@ -1,4 +1,6 @@
-
+!! @author
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
     
 module interpolate_m
     implicit none

@@ -1,3 +1,7 @@
+!! @author
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
+
 module time_m
     
     contains

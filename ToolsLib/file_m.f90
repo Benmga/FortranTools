@@ -1,5 +1,6 @@
 !! @author
-!!   G. Ma
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
 !! @date
 !!   20191226
     

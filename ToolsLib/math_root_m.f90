@@ -1,12 +1,11 @@
 !>
 !! @author
-!!   G. Ma    
+!!   MA Gang
+!!   magang@hrbeu.edu.cn    
 !! @version A60514   
 !! @revision 20190929
 !!    
     
-
-!
 module math_root_m
     implicit none
     !private

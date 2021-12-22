@@ -1,3 +1,7 @@
+!! @author
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
+
 module integration_m
     
     implicit none

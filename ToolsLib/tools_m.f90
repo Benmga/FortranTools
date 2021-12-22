@@ -1,3 +1,7 @@
+!! @author
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
+
 module tools_m
     use string_m
     use file_m

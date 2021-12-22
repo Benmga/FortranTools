@@ -6,7 +6,8 @@
 !!   - character(:), allocatable
 !!   - character(len=*)
 !! @author
-!!   G. Ma
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
 !! @date
 !!   2015-04-08 created.
 !!   2019-07-17 edited.    

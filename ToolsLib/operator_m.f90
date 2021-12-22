@@ -1,4 +1,7 @@
-! version 20210507
+!! @author
+!!   MA Gang
+!!   magang@hrbeu.edu.cn 
+!! version 20210507
     
 module operator_m
     use math_m

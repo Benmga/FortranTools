@@ -1,6 +1,7 @@
 !>
 !! @author
-!!   G. Ma    
+!!   MA Gang
+!!   magang@hrbeu.edu.cn    
 !! @version A60514   
 !! @revision 20210622
 !!    
