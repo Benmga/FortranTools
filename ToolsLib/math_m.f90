@@ -644,5 +644,15 @@ module math_m
         a = a + b
     end subroutine  
     
+    ! 字符串转数字
+    function toInt(str1) result(num)
+        implicit none
+        character(*) :: str1
+        integer :: num
+        
+        read(str1,"(i)") num
+        
+    end function
+    
 end module
 

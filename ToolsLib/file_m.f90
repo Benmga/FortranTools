@@ -3,9 +3,11 @@
 !! @date
 !!   20191226
     
+! è¿™äº›æ–‡ä»¶çš„å¤„ç†åªèƒ½ç”¨äºŽWindowsçŽ¯å¢ƒ    
 module file_m
     use string_m    
     implicit none
+    
     contains
     
     
@@ -22,34 +24,34 @@ function loadtxt(filepath) result(array)
 
     inquire(file=trim(filepath), exist=alive)
     if(.not. alive) then
-        write(*,*) "ÎÄ¼þ²»´æÔÚ£¬", trim(filepath)
+        write(*,*) "æ–‡ä»¶ä¸å­˜åœ¨ï¼Œ", trim(filepath)
         return
     endif    
     
-    cols = getfilecol(filepath,2)  ! »ñµÃÁÐÊý
+    cols = getfilecol(filepath,2)  ! èŽ·å¾—åˆ—æ•°
     
-    ! »ñµÃÊý¾ÝÇøÓòÐÐÊý
+    ! èŽ·å¾—æ•°æ®åŒºåŸŸè¡Œæ•°
     open(iin, file=filepath)
-    read(iin,*)  !±êÌâÐÐ    
+    read(iin,*)  !æ ‡é¢˜è¡Œ    
     !rows = getfilerow(filepath)
     rows = 0
     iostatus = 0
     do while (iostatus == 0 )
-        str = ""  ! Õâ¾ä±ØÐëÒªÓÐ
+        str = ""  ! è¿™å¥å¿…é¡»è¦æœ‰
 	    read( iin,*,iostat=iostatus) str
-        if(lenl(str)==0) exit  !¿ÕÐÐÖÕÖ¹
+        if(lenl(str)==0) exit  !ç©ºè¡Œç»ˆæ­¢
 	    rows = rows + 1
         !write(*,*) rows,str(1:10)
     end do
     
-    rewind(iin) ! »Øµ½µÚÒ»ÐÐ
+    rewind(iin) ! å›žåˆ°ç¬¬ä¸€è¡Œ
 
-    ! ´æ·ÅÊý¾ÝµÄÊý×é¿ª±ÙÄÚ´æ
+    ! å­˜æ”¾æ•°æ®çš„æ•°ç»„å¼€è¾Ÿå†…å­˜
     allocate(array(rows, cols))
     array = 0.0d0
     
-    ! ¶ÁÊý¾Ý
-    read(iin,*)  !±êÌâÐÐ  
+    ! è¯»æ•°æ®
+    read(iin,*)  !æ ‡é¢˜è¡Œ  
     do i = 1, rows
         read(iin,*,iostat=IOStatus) array(i,:)
         !write(*,*) i, array(i,1:3)
@@ -73,7 +75,7 @@ end function
 !
 !    inquire(file=trim(filepath), exist=alive)
 !    if(.not. alive) then
-!        write(*,*) "ÎÄ¼þ²»´æÔÚ£¬", trim(filepath)
+!        write(*,*) "æ–‡ä»¶ä¸å­˜åœ¨ï¼Œ", trim(filepath)
 !        return
 !    endif    
 !    
@@ -83,7 +85,7 @@ end function
 !    array = 0.0d0
 !    
 !    open(iin, file=filepath)
-!    read(iin,*)  !±êÌâÐÐ
+!    read(iin,*)  !æ ‡é¢˜è¡Œ
 !    
 !    i = 1
 !    do while(1)
@@ -230,15 +232,15 @@ function getfilerow2(filepath,comments,skiprows) result(row)
     !>
     !! the absolute file path which can be any length.
     character(len=*) :: filepath
+    integer :: skiprows       ! è·³è¿‡å‰å¤šå°‘è¡Œ
+    character(*) :: comments  ! æ³¨é‡Šè¡Œçš„ç¬¦å·å¼€å¤´çš„ï¼Œä¼šè¢«å¿½ç•¥
     !>
     !! @return
     !! the row number of the given file.
     integer :: row
     logical :: alive
     integer*4 :: iostatus  ! never set value in the defination.
-    character(*) :: comments
     character(256) :: char
-    integer :: skiprows
     integer :: i
 
     row = -1

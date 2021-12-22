@@ -4,13 +4,12 @@ module integration_m
     private
     public integrate
     
-    ! °´ÕÕFortran2003µÄ¹æÔò£¬Èç¹ûÊÇÊı×éĞÎÊ½£¬¾ÍÒªÓÃÕâ¸öÁË·½Ê½ÁË
+    ! æŒ‰ç…§Fortran2003çš„è§„åˆ™ï¼Œå¦‚æœæ˜¯æ•°ç»„å½¢å¼ï¼Œå°±è¦ç”¨è¿™ä¸ªäº†æ–¹å¼äº†
     abstract interface
         function func_f(x) result(matrix)   
             implicit none
             real(8) :: x
             real(8), allocatable :: matrix(:,:)
-            
         end function
     end interface
     
@@ -37,7 +36,7 @@ module integration_m
     
     function integrate(func,a,b) result(sums)
         implicit none
-        procedure(func_f) :: func  ! ²»ÓÃexternalÁË
+        procedure(func_f) :: func  ! ä¸ç”¨externaläº†
         real(8), optional :: a, b
         real(8), allocatable :: sums(:,:)
     
@@ -61,7 +60,7 @@ module integration_m
         do i = 1, numGS
             x = coeLimitA*GSPoints(i) + coeLimitB
             if(i==1) then
-                ! µÚÒ»´ÎÔËĞĞÒªÏÈÍ¨¹ı¸³Öµ¿ª¶¯Ì¬ÄÚ´æ
+                ! ç¬¬ä¸€æ¬¡è¿è¡Œè¦å…ˆé€šè¿‡èµ‹å€¼å¼€åŠ¨æ€å†…å­˜
                 sums = func(x)*GSWeights(i)
             else
                 sums = sums + func(x)*GSWeights(i)

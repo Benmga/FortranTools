@@ -20,10 +20,11 @@ module math_root_m
     contains
 
     
-real*8 function cubicEquation(x,a,b,c,d)
+function cubicEquation(x,a,b,c,d)
     implicit none
-    real*8 x
-    real*8 a,b,c,d
+    real(8) :: x
+    real(8) :: a,b,c,d
+    real(8) :: cubicEquation
     cubicEquation = a*x**3 + b*x**2 +c*x + d
 end function
 
@@ -36,20 +37,20 @@ subroutine rootCubicEquation(a,b,c,d,xa,xb,numRoots,Roots)
     !
     implicit none
     ! INPUT
-    real*8 a,b,c,d
-    real*8 xa, xb  ! limit range in which the roots should be
+    real(8) :: a,b,c,d
+    real(8) :: xa, xb  ! limit range in which the roots should be
 
     ! OUPUT
-    integer*4 numRoots  ! return the number of roots
-    real*8 Roots(3)     ! return the roots.
+    integer :: numRoots  ! return the number of roots
+    real(8) :: Roots(3)     ! return the roots.
 
     ! TEMP
-    integer*4 maxCycles,i  ! Counter for bisection method. maxCycles=50 here.
-    real*8 delta
-    real*8 xm, xn  ! the variable limit, xa <= xm < xn <= xb
-    real*8 ym, yn  ! the variable limit
-    real*8 xk, yk  ! the center in [xm,xn], used in bisection method
-    real*8, parameter :: incre = 0.01d0  ! used to find the right side limit of the first root.
+    integer :: maxCycles,i  ! Counter for bisection method. maxCycles=50 here.
+    real(8) :: delta
+    real(8) :: xm, xn  ! the variable limit, xa <= xm < xn <= xb
+    real(8) :: ym, yn  ! the variable limit
+    real(8) :: xk, yk  ! the center in [xm,xn], used in bisection method
+    real(8), parameter :: incre = 0.01d0  ! used to find the right side limit of the first root.
     logical flag
 
 
@@ -167,11 +168,11 @@ end subroutine
 
 subroutine reOrderCheck(numRoots, rooti, rootk, xa, xb, Roots)
     implicit none
-    integer*4 numRoots
-    real*8 Roots(3)
-    real*8 rooti, rootk
-    real*8 xa, xb
-    real*8 temp
+    integer :: numRoots
+    real(8) :: Roots(3)
+    real(8) :: rooti, rootk
+    real(8) :: xa, xb
+    real(8) :: temp
 
     if(rooti>rootk) then
         temp  = rooti
@@ -197,14 +198,14 @@ subroutine rootCubicEquationII(coefs,xa,xb,numRoots,Roots)
     !
     implicit none
     ! INPUT
-    real*8 coefs(4)
-    real*8 xa, xb  ! limit range in which the roots should be
+    real(8) :: coefs(4)
+    real(8) :: xa, xb  ! limit range in which the roots should be
 
     ! OUPUT
-    integer*4 numRoots  ! return the number of roots
-    real*8 Roots(3)     ! return the roots.
+    integer :: numRoots  ! return the number of roots
+    real(8) :: Roots(3)     ! return the roots.
     
-    real*8 a,b,c,d
+    real(8) :: a,b,c,d
     
     a = coefs(1)
     b = coefs(2)

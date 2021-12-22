@@ -9,14 +9,12 @@ module EulerRotation_m
     
     contains    
     
-      
-    
     !> 
     !! R123
-    !! ������ϵOXYZ�Ͷ�ϵOxyz��ʼ�غϡ�
-    !! ���ȣ������ƶ�ϵox��ת��phi�Ƕȣ�
-    !! Ȼ�󣬸����ƶ�ϵoy'��ת��theta�Ƕȣ�
-    !! ��󣬸����ƶ�ϵoz''��ת��psi�Ƕȡ�
+    !! 定坐标系OXYZ和动系Oxyz初始重合。
+    !! 首先，刚体绕动系ox轴转动phi角度，
+    !! 然后，刚体绕动系oy'轴转动theta角度，
+    !! 最后，刚体绕动系oz''轴转动psi角度。
     !! [X] = Rx(phi)Ry(theta)Rz(psi)[x]
     !!
     !!
@@ -27,8 +25,8 @@ module EulerRotation_m
      function Rot(a) result(R)
         ! get global from local
         implicit none
-        real*8 a(3)  !< radian angles
-        real*8 R(3,3)
+        real(8) :: a(3)  !< radian angles
+        real(8) :: R(3,3)
         
         R(1,1) =  cos(a(2))*cos(a(3))
         R(1,2) = -cos(a(2))*sin(a(3))
@@ -53,8 +51,8 @@ module EulerRotation_m
         ! get local from global
         ! the transposed rotation
         implicit none
-        real*8 angles(3)  !< radian angles
-        real*8 R(3,3)
+        real(8) :: angles(3)  !< radian angles
+        real(8) :: R(3,3)
         R = Rot(angles)
         R = transpose(R)
     end function    
@@ -67,9 +65,9 @@ module EulerRotation_m
         ! get local from global, for first order derivative
         ! the transposed rotation
         implicit none
-        real*8 angles(3)  !< radian angles
-        real*8 R(3,3)
-        real*8 :: a,b,c
+        real(8) :: angles(3)  !< radian angles
+        real(8) :: R(3,3)
+        real(8) :: a,b,c
         
         a = angles(1)
         b = angles(2)
@@ -95,9 +93,9 @@ module EulerRotation_m
    
     function rTRot(angles) result(R)
         implicit none
-        real*8 angles(3)  !< radian angles
-        real*8 R(3,3)
-        real*8 :: a,b,c
+        real(8) :: angles(3)  !< radian angles
+        real(8) :: R(3,3)
+        real(8) :: a,b,c
         
         a = angles(1)
         b = angles(2)
@@ -108,79 +106,6 @@ module EulerRotation_m
         R(3,1:3) = [-cos(c)*tan(b),  sin(c)*tan(b), 1.0d0]        
        
     end function    
-
-    !
-    !!! 123�Ƕȵ�
-    !!! [X] = [R][x]
-    !function Rotd(a) result(R)
-    !    ! get global from local
-    !    implicit none
-    !    real*8 a(3)  ! deg
-    !    real*8 R(3,3)
-    !    
-    !    R(1,1) =  cosd(a(2))*cosd(a(3))
-    !    R(1,2) = -cosd(a(2))*sind(a(3))
-    !    R(1,3) =  sind(a(2))
-    !
-    !    R(2,1) =  cosd(a(1))*sind(a(3)) + sind(a(1))*sind(a(2))*cosd(a(3))
-    !    R(2,2) =  cosd(a(1))*cosd(a(3)) - sind(a(1))*sind(a(2))*sind(a(3))
-    !    R(2,3) = -sind(a(1))*cosd(a(2))
-    !
-    !    R(3,1) =  sind(a(1))*sind(a(3)) - cosd(a(1))*sind(a(2))*cosd(a(3))
-    !    R(3,2) =  sind(a(1))*cosd(a(3)) + cosd(a(1))*sind(a(2))*sind(a(3))
-    !    R(3,3) =  cosd(a(1))*cosd(a(2))   
-    !
-    !end function    
-    !
-    !!!  [x] = [R][X]
-    !function rRotd(anglesDeg) result(R)
-    !    ! get local from global
-    !    ! the transposed rotation
-    !    implicit none
-    !    real*8 anglesDeg(3)
-    !    real*8 R(3,3)
-    !    
-    !    R = Rotd(anglesDeg)
-    !    R = transpose(R)
-    !end function 
-    !
-    !!!  [w] = [R][dPhi/dt]
-    !function TRotd(angles) result(R)
-    !    ! get local from global, for first order derivative
-    !    ! the transposed rotation
-    !    implicit none
-    !    real*8 angles(3)  !< deg angles
-    !    real*8 R(3,3)
-    !    real*8 :: a,b,c
-    !    
-    !    a = angles(1)
-    !    b = angles(2)
-    !    c = angles(3)
-    !    
-    !    R(1,1:3) = [ cosd(c)*cosd(b), sind(c), 0.0d0]
-    !    R(2,1:3) = [-sind(c)*cosd(b), cosd(c), 0.0d0]
-    !    R(3,1:3) = [ sind(b),           0.0d0, 1.0d0]
-    !end function        
-    !
-    !! [dPhi/dt] = [R][w]
-    !function rTRotd(angles) result(R)
-    !    implicit none
-    !    real*8 angles(3)  !< deg angles
-    !    real*8 R(3,3)
-    !    real*8 :: a,b,c
-    !    
-    !    a = angles(1)
-    !    b = angles(2)
-    !    c = angles(3)
-    !    
-    !    R(1,1:3) = [ cosd(c)/cosd(b), -sind(c)/cosd(b), 0.0d0]
-    !    R(2,1:3) = [ sind(c),          cosd(c),         0.0d0]
-    !    R(3,1:3) = [-cosd(c)*tand(b),  sind(c)*tand(b), 1.0d0]        
-    !   
-    !end function        
-    !
-
-
 
     !>
     !! \f${\bf{R}} = \left[ {\matrix{
@@ -193,11 +118,11 @@ module EulerRotation_m
         implicit none
         
         ! INPUT
-        real*8 angles(3)  !< radian angles              
+        real(8) :: angles(3)  !< radian angles              
         ! RETURN
-        real*8 R(3,3)
+        real(8) :: R(3,3)
         ! TEMP
-        real*8 a,b,c  ! phi, theta, psi, the three Euler angle in 1-2-3 order.
+        real(8) :: a,b,c  ! phi, theta, psi, the three Euler angle in 1-2-3 order.
                       ! phi is not used in this routine.
                               
         a = angles(1)
@@ -220,13 +145,13 @@ module EulerRotation_m
     
     
     
-    !!  312��ת��
+    !!  312的转动
     
     function Rot312(a) result(R)
         ! get global from local
         implicit none
-        real*8 a(3)  !< radian angles
-        real*8 R(3,3)
+        real(8) :: a(3)  !< radian angles
+        real(8) :: R(3,3)
         
         R(1,1) = -sin(a(1))*sin(a(2))*sin(a(3)) + cos(a(2))*cos(a(3))
         R(1,2) = -cos(a(1))*sin(a(3))
@@ -242,13 +167,13 @@ module EulerRotation_m
     end function  
 
 
-    ! ŷ������������ٶ�֮��Ĺ�ϵ
+    ! 欧拉角速率与角速度之间的关系
     ! [w] = [T][da/dt]
     function TRot312(a) result(R)
         ! get global from local
         implicit none
-        real*8 a(3)  !< radian angles
-        real*8 R(3,3)
+        real(8) :: a(3)  !< radian angles
+        real(8) :: R(3,3)
         
         R(1,1) = 1.0d0
         R(1,2) = 0.0d0
@@ -263,13 +188,13 @@ module EulerRotation_m
         R(3,3) = cos(a(1))*cos(a(2))
     end function  
 
-    ! ŷ������������ٶ�֮��Ĺ�ϵ
+    ! 欧拉角速率与角速度之间的关系
     ! [da/dt] = [T][w]
     function rTRot312(a) result(R)
         ! get global from local
         implicit none
-        real*8 a(3)  !< radian angles
-        real*8 R(3,3)
+        real(8) :: a(3)  !< radian angles
+        real(8) :: R(3,3)
         
         R(1,1) = 1.0d0
         R(1,2) = sin(a(1))*tan(a(2))

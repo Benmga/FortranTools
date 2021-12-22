@@ -13,13 +13,13 @@ module interpolate_m
     
     contains
      
-    
+    ! 线性插值
     function get_A(x,x0,x1,F0,F1) result(F)
         implicit none
+        real(8) :: x      ! x0 < x < x1
         real(8) :: x0, x1
         real(8) :: F0, F1
-        real(8) :: x  ! x0 < x < x1
-        real(8) :: F  ! return
+        real(8) :: F      ! return
         real(8) :: A, B
         
         if(x1==x0) then
@@ -34,6 +34,7 @@ module interpolate_m
     end function
     
     
+    ! 曲线插值
     function get_B(u, x, y) result(v)
         implicit none
         real(8) :: u

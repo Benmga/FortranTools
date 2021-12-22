@@ -111,24 +111,24 @@ module string_m
     
 
     !>
-    !! Í¨¹ıÊ¶±ğµ¥¸ö·Ö¸ô·û½«×Ö·û´®InStr½øĞĞ·Ö¸î£¬·µ»Ø±»·Ö¸îºóµÄÊıÄ¿.
+    !! é€šè¿‡è¯†åˆ«å•ä¸ªåˆ†éš”ç¬¦å°†å­—ç¬¦ä¸²InStrè¿›è¡Œåˆ†å‰²ï¼Œè¿”å›è¢«åˆ†å‰²åçš„æ•°ç›®.
     !! @date
     !! G. Ma 2015-04-10 modified \n
-    !! ÎâĞìÆ½(wxp07@qq.com) 2011-04-29 created
+    !! å´å¾å¹³(wxp07@qq.com) 2011-04-29 created
     !!
     function getstringsplitednumber(instr,delimiter) result(nsize)
         implicit none
         !>
-        !! ÊäÈëµÄ×Ö·û´®¡£×Ö·û´®³¤¶ÈÈÎÒâ¡£
+        !! è¾“å…¥çš„å­—ç¬¦ä¸²ã€‚å­—ç¬¦ä¸²é•¿åº¦ä»»æ„ã€‚
         character(len = *), intent( in ) :: instr
         !>
-        !! ·Ö¸ô·ûºÅ¡£\n
-        !! ¿ÉÒÔ½«¶à¸ö·Ö¸î·ûºÅ·ÅÔÚÕâÒ»¸ö±äÁ¿Àï£¬³ÌĞò»á×Ô¶¯Õç±ğ£¬°´µ¥·ûºÅ½øĞĞ·Ö¸î¡£\n
-        !! Ö»Òª·ûºÏÆäÖĞÈÎÒâÒ»¸ö·ûºÅ£¬¼´½øĞĞ·Ö¸î¡£\n
-        !! ÖØ¸´µÄ·Ö¸ô·û½«±»ºöÂÔ¡£\n
-        !! ÀıÈç';,,' Ê¹ÓÃ;ºÍ,·Ö¸î×Ö·û´®
+        !! åˆ†éš”ç¬¦å·ã€‚\n
+        !! å¯ä»¥å°†å¤šä¸ªåˆ†å‰²ç¬¦å·æ”¾åœ¨è¿™ä¸€ä¸ªå˜é‡é‡Œï¼Œç¨‹åºä¼šè‡ªåŠ¨ç”„åˆ«ï¼ŒæŒ‰å•ç¬¦å·è¿›è¡Œåˆ†å‰²ã€‚\n
+        !! åªè¦ç¬¦åˆå…¶ä¸­ä»»æ„ä¸€ä¸ªç¬¦å·ï¼Œå³è¿›è¡Œåˆ†å‰²ã€‚\n
+        !! é‡å¤çš„åˆ†éš”ç¬¦å°†è¢«å¿½ç•¥ã€‚\n
+        !! ä¾‹å¦‚';,,' ä½¿ç”¨;å’Œ,åˆ†å‰²å­—ç¬¦ä¸²
         character(len = *), intent( in ) :: delimiter
-        integer :: nsize  !< ×Ö·û´®×îÖÕ±»·Ö¸î³öÀ´µÄÊıÄ¿
+        integer :: nsize  !< å­—ç¬¦ä¸²æœ€ç»ˆè¢«åˆ†å‰²å‡ºæ¥çš„æ•°ç›®
         integer :: i, j
         integer :: istart  ! split index for start position
 
@@ -138,7 +138,7 @@ module string_m
 	        do j=1,len(delimiter)
 		        if (instr(i:i) == delimiter(j:j)) then
 			        if (istart == i) then
-			        istart=i+1 ! ¿É·ÀÖ¹·Ö¸ô·ûÏàÁ¬µÄÇé¿ö
+			        istart=i+1 ! å¯é˜²æ­¢åˆ†éš”ç¬¦ç›¸è¿çš„æƒ…å†µ
 			        end if
 			        if (istart<i) then
 				        nsize=nsize+1
@@ -148,14 +148,14 @@ module string_m
 	        end do
         end do
 
-        ! Æ¥Åä×îºóÒ»¸ö×Ó×Ö·û´®
+        ! åŒ¹é…æœ€åä¸€ä¸ªå­å­—ç¬¦ä¸²
         if (nsize>0) then
 	        if (istart<len(instr)) then
 		        nsize=nsize+1
 	        end if
         end if
 
-        ! Èç¹ûÎŞ¿É·Ö¸îµÄ×Ó×Ö·û´®,Ôò°üº¬Õû¸ö×Ö·û´®ÎªÊı×éµÄµÚÒ»ÔªËØ
+        ! å¦‚æœæ— å¯åˆ†å‰²çš„å­å­—ç¬¦ä¸²,åˆ™åŒ…å«æ•´ä¸ªå­—ç¬¦ä¸²ä¸ºæ•°ç»„çš„ç¬¬ä¸€å…ƒç´ 
         if ( (nsize<1) .and. (len(trim(instr)) > 0 )) then
 		        nsize=1
         end if
@@ -164,22 +164,22 @@ module string_m
 
 
     !>
-    !! Í¨¹ıÊ¶±ğµ¥¸ö·Ö¸ô·û½«×Ö·û´®InStr½øĞĞ·Ö¸î£¬·µ»Ø±»·Ö¸îºóµÄ×Ö·û´®Êı×é.
+    !! é€šè¿‡è¯†åˆ«å•ä¸ªåˆ†éš”ç¬¦å°†å­—ç¬¦ä¸²InStrè¿›è¡Œåˆ†å‰²ï¼Œè¿”å›è¢«åˆ†å‰²åçš„å­—ç¬¦ä¸²æ•°ç»„.
     !! @date
     !! G. Ma 2015-04-10 modified \n
-    !! ÎâĞìÆ½(wxp07@qq.com) 2011-04-29 created
+    !! å´å¾å¹³(wxp07@qq.com) 2011-04-29 created
     !!
     function getstringsplited(instr,delimiter) result(stringarray)
         implicit none
         !>
-        !! ÊäÈëµÄ×Ö·û´®¡£×Ö·û´®³¤¶ÈÈÎÒâ¡£
+        !! è¾“å…¥çš„å­—ç¬¦ä¸²ã€‚å­—ç¬¦ä¸²é•¿åº¦ä»»æ„ã€‚
         character(len = *), intent( in ) :: instr
         !>
-        !! ·Ö¸ô·ûºÅ¡£\n
-        !! ¿ÉÒÔ½«¶à¸ö·Ö¸î·ûºÅ·ÅÔÚÕâÒ»¸ö±äÁ¿Àï£¬³ÌĞò»á×Ô¶¯Õç±ğ£¬°´µ¥·ûºÅ½øĞĞ·Ö¸î¡£\n
-        !! Ö»Òª·ûºÏÆäÖĞÈÎÒâÒ»¸ö·ûºÅ£¬¼´½øĞĞ·Ö¸î¡£\n
-        !! ÖØ¸´µÄ·Ö¸ô·û½«±»ºöÂÔ¡£\n
-        !! ÀıÈç';,,' Ê¹ÓÃ;ºÍ,·Ö¸î×Ö·û´®
+        !! åˆ†éš”ç¬¦å·ã€‚\n
+        !! å¯ä»¥å°†å¤šä¸ªåˆ†å‰²ç¬¦å·æ”¾åœ¨è¿™ä¸€ä¸ªå˜é‡é‡Œï¼Œç¨‹åºä¼šè‡ªåŠ¨ç”„åˆ«ï¼ŒæŒ‰å•ç¬¦å·è¿›è¡Œåˆ†å‰²ã€‚\n
+        !! åªè¦ç¬¦åˆå…¶ä¸­ä»»æ„ä¸€ä¸ªç¬¦å·ï¼Œå³è¿›è¡Œåˆ†å‰²ã€‚\n
+        !! é‡å¤çš„åˆ†éš”ç¬¦å°†è¢«å¿½ç•¥ã€‚\n
+        !! ä¾‹å¦‚';,,' ä½¿ç”¨;å’Œ,åˆ†å‰²å­—ç¬¦ä¸²
         character(len = *), intent( in ) :: delimiter
         !
         ! temp array for the split operation
@@ -189,7 +189,7 @@ module string_m
         !! return the compressed string array.
         character(len=:), allocatable :: stringarray(:)
 
-        integer :: nsize  !< ×Ö·û´®×îÖÕ±»·Ö¸î³öÀ´µÄÊıÄ¿
+        integer :: nsize  !< å­—ç¬¦ä¸²æœ€ç»ˆè¢«åˆ†å‰²å‡ºæ¥çš„æ•°ç›®
         integer :: i, j
         integer :: istart  ! split index for start position
 
@@ -199,7 +199,7 @@ module string_m
 	        do j=1,len(delimiter)
 		        if (instr(i:i) == delimiter(j:j)) then
 			        if (istart == i) then
-			        istart=i+1 ! ¿É·ÀÖ¹·Ö¸ô·ûÏàÁ¬µÄÇé¿ö
+			        istart=i+1 ! å¯é˜²æ­¢åˆ†éš”ç¬¦ç›¸è¿çš„æƒ…å†µ
 			        end if
 			        if (istart<i) then
 				        nsize=nsize+1
@@ -210,7 +210,7 @@ module string_m
 	        end do
         end do
 
-        ! Æ¥Åä×îºóÒ»¸ö×Ó×Ö·û´®
+        ! åŒ¹é…æœ€åä¸€ä¸ªå­å­—ç¬¦ä¸²
         if (nsize>0) then
 	        if (istart<len(instr)) then
 		        nsize=nsize+1
@@ -218,7 +218,7 @@ module string_m
 	        end if
         end if
 
-        ! Èç¹ûÎŞ¿É·Ö¸îµÄ×Ó×Ö·û´®,Ôò°üº¬Õû¸ö×Ö·û´®ÎªÊı×éµÄµÚÒ»ÔªËØ
+        ! å¦‚æœæ— å¯åˆ†å‰²çš„å­å­—ç¬¦ä¸²,åˆ™åŒ…å«æ•´ä¸ªå­—ç¬¦ä¸²ä¸ºæ•°ç»„çš„ç¬¬ä¸€å…ƒç´ 
         if ( (nsize<1) .and. (len(trim(instr)) > 0 )) then
 		    nsize=1
             strarray(1)=instr
@@ -229,7 +229,7 @@ module string_m
 
 
     !>
-    !! È¥³ı×Ö·û´®Êı×éÖĞÊ×Î²µÄ¿Õ¸ñ. °´ÕÕÊı×éÔªËØ×î´ó³¤¶ÈÖØĞÂÉè¶¨Êı×é.
+    !! å»é™¤å­—ç¬¦ä¸²æ•°ç»„ä¸­é¦–å°¾çš„ç©ºæ ¼. æŒ‰ç…§æ•°ç»„å…ƒç´ æœ€å¤§é•¿åº¦é‡æ–°è®¾å®šæ•°ç»„.
     !!
     function trimlarray(stringarrayinput) result(stringarray)
         implicit none
